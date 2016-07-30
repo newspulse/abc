@@ -1,0 +1,28 @@
+{
+  "name": "abc-vis",
+  "version": "1.0.0",
+  "description": "GovHack entry",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "budo index.js --live -- -t [ babelify ]"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/newspulse/abc.git"
+  },
+  "keywords": [
+    "govhack",
+    "abc.net.au"
+  ],
+  "author": "Brave Little Octopi",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/newspulse/abc/issues"
+  },
+  "homepage": "https://github.com/newspulse/abc#readme",
+  "devDependencies": {
+    "babelify": "^7.3.0",
+    "budo": "^8.3.0"
+  }
+}
