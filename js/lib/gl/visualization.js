@@ -14,7 +14,29 @@ export function initMap() {
 	const map = new google.maps.Map(mapDiv, {
 		center: {lat: -27.68, lng: 134.78},
 		zoom: 5,
-		minZoom: 5
+		minZoom: 5,
+		mapTypeControl: false,
+		streetViewControl: false
+	});
+
+	const ausBounds = new google.maps.LatLngBounds(
+		new google.maps.LatLng(-9.27562218, 113.37890625),
+		new google.maps.LatLng(-44.96479793, 156.88476563)
+	);
+
+	map.fitBounds(ausBounds);
+
+	map.addListener("dragend", () => {
+		const center = map.getCenter();
+
+		if (
+			center.lat() > ausBounds.f.f ||
+			center.lat() < ausBounds.f.b ||
+			center.lng() < ausBounds.b.b ||
+			center.lng() > ausBounds.b.f
+		) {
+			map.panToBounds(ausBounds);
+		}
 	});
 
 	const styles = [
