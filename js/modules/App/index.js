@@ -2,6 +2,7 @@
 export default module => {
 
 	module.addState({
-		stateWorks: true
+		stateWorks: true,
+		graphOpen: true
 	});
 };

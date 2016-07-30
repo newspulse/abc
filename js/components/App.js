@@ -1,14 +1,21 @@
-import {connect as Cerebral} from "cerebral-view-react";
 import React from "react";
+import {connect as Cerebral} from "cerebral-view-react";
 import DataGraph from "./DataGraph.js";
+import ArticlePanel from "./ArticlePanel.js";
 
+@Cerebral({
+	graphOpen: "app.graphOpen"
+})
 export default class App extends React.Component {
 	render() {
 		return (
 			<div className="app">
-				{"Hai"}
 				<div className="np-logo"></div>
-				<DataGraph />
+				{this.props.graphOpen ?
+					<DataGraph /> :
+					null
+				}
+				<ArticlePanel />
 			</div>
 		);
 	}
