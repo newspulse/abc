@@ -41,3 +41,16 @@ body, html {
 	width: 100%;
 	height: 100%;
 }
+
+.np-logo {
+	position: absolute;
+	bottom: 32px;
+	right: 64px;
+	width: 80px;
+	height: 55px;
+	background-size: 80px 55px;
+	background-image: url("../img/news-pulse-logo.png");
+	background-repeat: no-repeat;
+	z-index: 90;
+	
+}
