@@ -1,10 +1,13 @@
 import createContext from "gl-context";
 import latLongToMercator from "../math/lat-long-to-mercator";
+import createShader from "gl-shader";
 
 var fs = require("fs");
 
 const vertShader = fs.readFileSync("lib/gl/shaders/points.vert", "utf8");
 const fragShader = fs.readFileSync("lib/gl/shaders/points.frag", "utf8");
+
+const munged = JSON.parse(fs.readFileSync("data/munged.json", "utf8"));
 
 export function initMap() {
 	const mapDiv = document.getElementById('map');
@@ -19,7 +22,7 @@ export function initMap() {
 
 	let pointProgram;
 	let pointArrayBuffer;
-	const POINT_COUNT = 2000;
+	let POINT_COUNT = 0;
 
 	const MIN_X = 115;
 	const MAX_X = 151;
@@ -40,7 +43,7 @@ export function initMap() {
 		const canvasLayerOptions = {
 			map: map,
 			resizeHandler: resize,
-			animate: false,
+			animate: true,
 			updateHandler: update,
 			resolutionScale: resolutionScale
 		};
@@ -83,20 +86,26 @@ export function initMap() {
 	function loadData() {
 		// this data could be loaded from anywhere, but in this case we'll
 		// generate some random x,y coords in a world coordinate bounding box
-		const rawData = new Float32Array(2 * POINT_COUNT);
-		for (let i = 0; i < rawData.length; i += 2) {
-			const point = latLongToMercator(-37.8136, 144.9631);
-			rawData[i] = point[0];
-			rawData[i + 1] = point[1];
+		const rawData = [];
+		for (let p in munged) {
+			let mPoint = munged[p];
+			if (mPoint.lonlat[0] != null) {
+				const point = latLongToMercator(mPoint.lonlat[1], mPoint.lonlat[0]);
+				rawData.push(point[0], point[1]) ;
+				POINT_COUNT++;
+			}
 		}
+
+		let raw = new Float32Array(rawData);
 
 		// create webgl buffer, bind it, and load rawData into it
 		pointArrayBuffer = gl.createBuffer();
 		gl.bindBuffer(gl.ARRAY_BUFFER, pointArrayBuffer);
-		gl.bufferData(gl.ARRAY_BUFFER, rawData, gl.STATIC_DRAW);
+		gl.bufferData(gl.ARRAY_BUFFER, raw, gl.STATIC_DRAW);
 
 		// enable the 'worldCoord' attribute in the shader to receive buffer
 		const attributeLoc = gl.getAttribLocation(pointProgram, 'worldCoord');
+
 		gl.enableVertexAttribArray(attributeLoc);
 
 		// tell webgl how buffer is laid out (pairs of x,y coords)
@@ -176,7 +185,6 @@ export function initMap() {
 		gl.drawArrays(gl.POINTS, 0, POINT_COUNT);
 
 	}
-
 
 	init();
 }
