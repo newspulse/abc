@@ -3,7 +3,8 @@ import ReactDOM from "react-dom";
 import App from "./components/App";
 import controller from "./controller.js";
 import {initMap} from "./lib/gl/visualization.js";
+import {Container} from 'cerebral-view-react'
 
 initMap();
 
-ReactDOM.render(<App controller={controller} />, document.getElementById("ui"));
+ReactDOM.render(<Container controller={controller}><App /></Container>, document.getElementById("ui"));
