@@ -2,13 +2,13 @@ import createContext from "gl-context";
 import latLongToMercator from "../math/lat-long-to-mercator";
 
 export function initMap() {
-		var mapDiv = document.getElementById('map');
-		var map = new google.maps.Map(mapDiv, {
-			center: {lat: -27.68, lng: 134.78},
-			zoom: 4
-		});
+	const mapDiv = document.getElementById('map');
+	const map = new google.maps.Map(mapDiv, {
+		center: {lat: -27.68, lng: 134.78},
+		zoom: 4
+	});
 
-	var coords = [
+	const coords = [
 		{lat: -37.82107355, lng: 144.95516023}, // north west
 		{lat: -37.8131744, lng: 144.95151243}, // south west
 		{lat: -37.80754617, lng: 144.97133932}, // south east
@@ -16,56 +16,57 @@ export function initMap() {
 	];
 
 	map.data.add({geometry: new google.maps.Data.Polygon([coords])});
-	  var canvasLayer;
-	  var gl;
+	let canvasLayer;
+	let gl;
 
-	  var pointProgram;
-	  var pointArrayBuffer;
-	  var POINT_COUNT = 2000;
+	let pointProgram;
+	let pointArrayBuffer;
+	const POINT_COUNT = 2000;
 
-	  var MIN_X = 115;
-	  var MAX_X = 151;
-	  var MIN_Y = 88;
-	  var MAX_Y = 109;
+	const MIN_X = 115;
+	const MAX_X = 151;
+	const MIN_Y = 88;
+	const MAX_Y = 109;
 
-	  var pixelsToWebGLMatrix = new Float32Array(16);
-	  var mapMatrix = new Float32Array(16);
+	const pixelsToWebGLMatrix = new Float32Array(16);
+	const mapMatrix = new Float32Array(16);
 
-	  var resolutionScale = window.devicePixelRatio || 1;
+	const resolutionScale = window.devicePixelRatio || 1;
 
-	  function init() {
+	function init() {
 
 		// initialize the canvasLayer
-		var canvasLayerOptions = {
-		  map: map,
-		  resizeHandler: resize,
-		  animate: false,
-		  updateHandler: update,
-		  resolutionScale: resolutionScale
+		const canvasLayerOptions = {
+			map: map,
+			resizeHandler: resize,
+			animate: false,
+			updateHandler: update,
+			resolutionScale: resolutionScale
 		};
+
 		canvasLayer = new CanvasLayer(canvasLayerOptions);
 
 		// initialize WebGL
 		gl = createContext(canvasLayer.canvas, {
-				premultipliedAlpha: false
-			}, function render () {
-				// request animation frame
-			});
+			premultipliedAlpha: false
+		}, function render() {
+			// request animation frame
+		});
 
 		createShaderProgram();
 		loadData();
-	  }
+	}
 
-	  function createShaderProgram() {
+	function createShaderProgram() {
 		// create vertex shader
-		var vertexSrc = vertShader;
-		var vertexShader = gl.createShader(gl.VERTEX_SHADER);
+		const vertexSrc = vertShader;
+		const vertexShader = gl.createShader(gl.VERTEX_SHADER);
 		gl.shaderSource(vertexShader, vertexSrc);
 		gl.compileShader(vertexShader);
 
 		// create fragment shader
-		var fragmentSrc = fragShader;
-		var fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
+		const fragmentSrc = fragShader;
+		const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
 		gl.shaderSource(fragmentShader, fragmentSrc);
 		gl.compileShader(fragmentShader);
 
@@ -76,16 +77,16 @@ export function initMap() {
 		gl.linkProgram(pointProgram);
 
 		gl.useProgram(pointProgram);
-	  }
+	}
 
-	  function loadData() {
+	function loadData() {
 		// this data could be loaded from anywhere, but in this case we'll
 		// generate some random x,y coords in a world coordinate bounding box
-		var rawData = new Float32Array(2 * POINT_COUNT);
-		for (var i = 0; i < rawData.length; i += 2) {
-		  let point = latLongToMercator(-37.8136, 144.9631);
-		  rawData[i] = point[0];
-		  rawData[i + 1] = point[1];
+		const rawData = new Float32Array(2 * POINT_COUNT);
+		for (let i = 0; i < rawData.length; i += 2) {
+			const point = latLongToMercator(-37.8136, 144.9631);
+			rawData[i] = point[0];
+			rawData[i + 1] = point[1];
 		}
 
 		// create webgl buffer, bind it, and load rawData into it
@@ -94,16 +95,16 @@ export function initMap() {
 		gl.bufferData(gl.ARRAY_BUFFER, rawData, gl.STATIC_DRAW);
 
 		// enable the 'worldCoord' attribute in the shader to receive buffer
-		var attributeLoc = gl.getAttribLocation(pointProgram, 'worldCoord');
+		const attributeLoc = gl.getAttribLocation(pointProgram, 'worldCoord');
 		gl.enableVertexAttribArray(attributeLoc);
 
 		// tell webgl how buffer is laid out (pairs of x,y coords)
 		gl.vertexAttribPointer(attributeLoc, 2, gl.FLOAT, false, 0, 0);
-	  }
+	}
 
-	  function resize() {
-		var width = canvasLayer.canvas.width;
-		var height = canvasLayer.canvas.height;
+	function resize() {
+		const width = canvasLayer.canvas.width;
+		const height = canvasLayer.canvas.height;
 
 		gl.viewport(0, 0, width, height);
 
@@ -112,14 +113,14 @@ export function initMap() {
 		// this matrix by the same amount to account for the larger number of
 		// pixels.
 		pixelsToWebGLMatrix.set([
-		  2 * resolutionScale / width, 0, 0, 0,
-		  0, -2 * resolutionScale / height, 0, 0,
-		  0, 0, 0, 0,
-		  -1, 1, 0, 1
+			2 * resolutionScale / width, 0, 0, 0,
+			0, -2 * resolutionScale / height, 0, 0,
+			0, 0, 0, 0,
+			-1, 1, 0, 1
 		]);
-	  }
+	}
 
-	  function scaleMatrix(matrix, scaleX, scaleY) {
+	function scaleMatrix(matrix, scaleX, scaleY) {
 		// scaling x and y, which is just scaling first two columns of matrix
 		matrix[0] *= scaleX;
 		matrix[1] *= scaleX;
@@ -130,20 +131,20 @@ export function initMap() {
 		matrix[5] *= scaleY;
 		matrix[6] *= scaleY;
 		matrix[7] *= scaleY;
-	  }
+	}
 
-	  function translateMatrix(matrix, tx, ty) {
+	function translateMatrix(matrix, tx, ty) {
 		// translation is in last column of matrix
-		matrix[12] += matrix[0]*tx + matrix[4]*ty;
-		matrix[13] += matrix[1]*tx + matrix[5]*ty;
-		matrix[14] += matrix[2]*tx + matrix[6]*ty;
-		matrix[15] += matrix[3]*tx + matrix[7]*ty;
-	  }
+		matrix[12] += matrix[0] * tx + matrix[4] * ty;
+		matrix[13] += matrix[1] * tx + matrix[5] * ty;
+		matrix[14] += matrix[2] * tx + matrix[6] * ty;
+		matrix[15] += matrix[3] * tx + matrix[7] * ty;
+	}
 
-	  function update() {
+	function update() {
 		gl.clear(gl.COLOR_BUFFER_BIT);
-		var mapProjection = map.getProjection();
-		console.log("update");
+		const mapProjection = map.getProjection();
+
 		/**
 		 * We need to create a transformation that takes world coordinate
 		 * points in the pointArrayBuffer to the coodinates WebGL expects.
@@ -152,51 +153,48 @@ export function initMap() {
 		 * 2. Scale and translate to take world coordinates to pixel coords
 		 * see https://developers.google.com/maps/documentation/javascript/maptypes#MapCoordinate
 		 */
-		
+
 		// copy pixel->webgl matrix
 		mapMatrix.set(pixelsToWebGLMatrix);
 
 		// Scale to current zoom (worldCoords * 2^zoom)
-		var scale = Math.pow(2, map.zoom);
+		const scale = Math.pow(2, map.zoom);
 		scaleMatrix(mapMatrix, scale, scale);
 
 		// translate to current view (vector from topLeft to 0,0)
-		var offset = mapProjection.fromLatLngToPoint(canvasLayer.getTopLeft());
+		const offset = mapProjection.fromLatLngToPoint(canvasLayer.getTopLeft());
 		translateMatrix(mapMatrix, -offset.x, -offset.y);
 
 		// attach matrix value to 'mapMatrix' uniform in shader
-		var matrixLoc = gl.getUniformLocation(pointProgram, 'mapMatrix');
+		const matrixLoc = gl.getUniformLocation(pointProgram, 'mapMatrix');
 		gl.uniformMatrix4fv(matrixLoc, false, mapMatrix);
 
 		// draw!
 		gl.drawArrays(gl.POINTS, 0, POINT_COUNT);
-	  }
+	}
 
+	const vertShader = `
+		attribute vec4 worldCoord;
 
+		uniform mat4 mapMatrix;
 
-var vertShader = `
-	  attribute vec4 worldCoord;
-
-	  uniform mat4 mapMatrix;
-
-	  void main() {
+		void main() {
 		// transform world coordinate by matrix uniform variable
 		gl_Position = mapMatrix * worldCoord;
 
 		// a constant size for points, regardless of zoom level
 		gl_PointSize = 10.;
-	  }
-`;
+		}
+	`;
 
-var fragShader = `	  
-  precision mediump float;
+	const fragShader = `
+		precision mediump float;
 
-  void main() {
-	// set pixels in points to something that stands out
-	gl_FragColor = vec4(.9, .3, .1, 1.);
-  }`;
+		void main() {
+		// set pixels in points to something that stands out
+		gl_FragColor = vec4(.9, .3, .1, 1.);
+		}`;
 
-init();
-
-// end
+	init();
 }
+
