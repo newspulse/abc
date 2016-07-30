@@ -31,8 +31,10 @@
   },
   "dependencies": {
     "cerebral": "^0.35.7",
+    "cerebral-module-devtools": "^0.7.0",
     "cerebral-view-react": "^0.12.6",
     "gl-context": "^0.1.1",
+    "moment": "^2.14.1",
     "react": "^15.3.0",
     "react-dom": "^15.3.0"
   }
