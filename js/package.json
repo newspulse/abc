@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "budo index.js --live -- -t [ babelify --presets [ es2015 react ] --plugins [ transform-decorators-legacy] ]]"
+    "start": "budo index.js --live -- -t [ babelify --presets [ es2015 react ] --plugins [ transform-decorators-legacy] ] -t [ brfs ]]"
   },
   "repository": {
     "type": "git",
@@ -30,10 +30,12 @@
     "budo": "^8.3.0"
   },
   "dependencies": {
+    "brfs": "^1.4.3",
     "cerebral": "^0.35.7",
     "cerebral-module-devtools": "^0.7.0",
     "cerebral-view-react": "^0.12.6",
     "gl-context": "^0.1.1",
+    "gl-shader": "^4.2.0",
     "moment": "^2.14.1",
     "react": "^15.3.0",
     "react-dom": "^15.3.0"

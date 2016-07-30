@@ -1,6 +1,11 @@
 import createContext from "gl-context";
 import latLongToMercator from "../math/lat-long-to-mercator";
 
+var fs = require("fs");
+
+const vertShader = fs.readFileSync("lib/gl/shaders/points.vert", "utf8");
+const fragShader = fs.readFileSync("lib/gl/shaders/points.frag", "utf8");
+
 export function initMap() {
 	const mapDiv = document.getElementById('map');
 	const map = new google.maps.Map(mapDiv, {
@@ -25,6 +30,9 @@ export function initMap() {
 	const mapMatrix = new Float32Array(16);
 
 	const resolutionScale = window.devicePixelRatio || 1;
+
+	let psize = 0;
+	let pdir = 1;
 
 	function init() {
 
@@ -160,33 +168,15 @@ export function initMap() {
 
 		// attach matrix value to 'mapMatrix' uniform in shader
 		const matrixLoc = gl.getUniformLocation(pointProgram, 'mapMatrix');
+		const psizeLoc = gl.getUniformLocation(pointProgram, 'psize');
 		gl.uniformMatrix4fv(matrixLoc, false, mapMatrix);
+		gl.uniform1f(psizeLoc, Math.pow(2, map.zoom));
 
 		// draw!
 		gl.drawArrays(gl.POINTS, 0, POINT_COUNT);
+
 	}
 
-	const vertShader = `
-		attribute vec4 worldCoord;
-
-		uniform mat4 mapMatrix;
-
-		void main() {
-		// transform world coordinate by matrix uniform variable
-		gl_Position = mapMatrix * worldCoord;
-
-		// a constant size for points, regardless of zoom level
-		gl_PointSize = 10.;
-		}
-	`;
-
-	const fragShader = `
-		precision mediump float;
-
-		void main() {
-		// set pixels in points to something that stands out
-		gl_FragColor = vec4(.9, .3, .1, 1.);
-		}`;
 
 	init();
 }
