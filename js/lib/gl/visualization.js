@@ -7,6 +7,15 @@ export function initMap() {
 			center: {lat: -27.68, lng: 134.78},
 			zoom: 4
 		});
+
+	var coords = [
+		{lat: -37.82107355, lng: 144.95516023}, // north west
+		{lat: -37.8131744, lng: 144.95151243}, // south west
+		{lat: -37.80754617, lng: 144.97133932}, // south east
+		{lat: -37.81537811, lng: 144.97485838}  // north east
+	];
+
+	map.data.add({geometry: new google.maps.Data.Polygon([coords])});
 	  var canvasLayer;
 	  var gl;
 
