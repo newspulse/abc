@@ -1,8 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
-
-
-console.log("HELLO WORLD");
+import App from "./components/App";
+import controller from "./lib/controller";
 
 window.initMap = function() {
 	var mapDiv = document.getElementById('map');
@@ -12,6 +11,4 @@ window.initMap = function() {
 	});
 }
 
-//initMap();
-
-// /ReactDOM.render(<Layout controller={controller} />, document.getElementById("spui"));
+ReactDOM.render(<App controller={controller} />, document.getElementById("ui"));
