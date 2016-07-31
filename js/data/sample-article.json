@@ -1,0 +1,128 @@
+{
+  "id" : 7455832,
+  "docType" : "Article",
+  "title" : "Coburg rallies: Seven arrested as police separate anti-racism, anti-immigration protesters",
+  "shortTeaserTitle" : "Coburg counter rallies",
+  "teaserTitle" : "Seven arrested as rival groups clash in violent Melbourne rallies",
+  "shortTeaserTextPlain" : "There is a large police presence in Melbourne's north as anti-racism and anti-Islam groups hold counter rallies.",
+  "teaserTextPlain" : "Seven people are arrested as violent scuffles break out between anti-racism and anti-immigration groups holding counter rallies in the multicultural Melbourne suburb of Coburg.",
+  "contentGenre" : "Current",
+  "thumbnailLink" : {
+    "id" : 7456356,
+    "imageLinks" : {
+      "thumbnail-4x3" : "http://www.abc.net.au/cm/rimage/7456314-4x3-thumbnail.jpg?v=2",
+      "large-4x3" : "http://www.abc.net.au/cm/rimage/7456314-4x3-large.jpg?v=2",
+      "thumbnail-16x9" : "http://www.abc.net.au/cm/rimage/7456314-16x9-thumbnail.jpg?v=2",
+      "large-16x9" : "http://www.abc.net.au/cm/rimage/7456314-16x9-large.jpg?v=2",
+      "thumbnail-1x1" : "http://www.abc.net.au/cm/rimage/7456314-1x1-thumbnail.jpg?v=2",
+      "large-1x1" : "http://www.abc.net.au/cm/rimage/7456314-1x1-large.jpg?v=2",
+      "thumbnail-3x2" : "http://www.abc.net.au/cm/rimage/7456314-3x2-thumbnail.jpg?v=2",
+      "large-3x2" : "http://www.abc.net.au/cm/rimage/7456314-3x2-large.jpg?v=2",
+      "thumbnail-3x4" : "http://www.abc.net.au/cm/rimage/7456314-3x4-thumbnail.jpg?v=2",
+      "large-3x4" : "http://www.abc.net.au/cm/rimage/7456314-3x4-large.jpg?v=2"
+    }
+  },
+  "relatedItems" : [ {
+    "id" : 7456238,
+    "docType" : "Video",
+    "shortTeaserTitle" : "Protesters clash with police in Coburg"
+  }, {
+    "id" : 7456356,
+    "docType" : "ImageProxy",
+    "shortTeaserTitle" : "A protester is sprayed with capsicum spray"
+  }, {
+    "id" : 7447174,
+    "docType" : "Article",
+    "shortTeaserTitle" : "People urged to avoid Coburg"
+  } ],
+  "subject" : [ {
+    "name" : "Race Relations",
+    "id" : 1208,
+    "parent" : {
+      "name" : "Community and Society",
+      "id" : 954
+    }
+  }, {
+    "name" : "Community and Society",
+    "id" : 954
+  }, {
+    "name" : "States and Territories",
+    "id" : 1588,
+    "parent" : {
+      "name" : "Government and Politics",
+      "id" : 1534
+    }
+  }, {
+    "name" : "Activism and Lobbying",
+    "id" : 1612,
+    "parent" : {
+      "name" : "Government and Politics",
+      "id" : 1534
+    }
+  } ],
+  "location" : [ {
+    "name" : "Coburg",
+    "id" : 19412,
+    "parent" : {
+      "name" : "VIC",
+      "id" : 18842,
+      "parent" : {
+        "name" : "Australia",
+        "id" : 6864,
+        "latitude" : "-26.000",
+        "longitude" : "134.500"
+      },
+      "latitude" : "-37.4500",
+      "longitude" : "146.0833"
+    },
+    "postCode" : "3058",
+    "latitude" : "-37.7422",
+    "longitude" : "144.9663"
+  }, {
+    "name" : "Melbourne",
+    "id" : 21708,
+    "parent" : {
+      "name" : "VIC",
+      "id" : 18842,
+      "parent" : {
+        "name" : "Australia",
+        "id" : 6864,
+        "latitude" : "-26.000",
+        "longitude" : "134.500"
+      },
+      "latitude" : "-37.4500",
+      "longitude" : "146.0833"
+    },
+    "postCode" : "3000",
+    "latitude" : "-37.8099",
+    "longitude" : "144.9622"
+  }, {
+    "name" : "VIC",
+    "id" : 18842,
+    "parent" : {
+      "name" : "Australia",
+      "id" : 6864,
+      "latitude" : "-26.000",
+      "longitude" : "134.500"
+    },
+    "latitude" : "-37.4500",
+    "longitude" : "146.0833"
+  } ],
+  "firstPublishedDate" : "2016-05-28T01:12:05+00:00",
+  "lastPublishedDate" : "2016-05-28T07:46:53+00:00",
+  "shortTeaserText" : "<p>There is a large police presence in Melbourne's north as anti-racism and anti-Islam groups hold counter rallies.</p>",
+  "teaserText" : "<p>Seven people are arrested as violent scuffles break out between anti-racism and anti-immigration groups holding counter rallies in the multicultural Melbourne suburb of Coburg.</p>",
+  "keywords" : "rally, protest, anti-racism, united patriots front, coburg, police, moreland",
+  "latitude" : "-37.7422",
+  "longitude" : "144.9663",
+  "version" : 56,
+  "importance" : 5,
+  "canonicalUrl" : "http://www.abc.net.au/news/2016-05-28/coburg-anti-racism-rally-protesters-take-to-melbourne-streets/7455832",
+  "rootNavigation" : {
+    "id" : 45902,
+    "segment" : "news",
+    "title" : "ABC News"
+  },
+  "textPlain" : "Seven people have been arrested amid violent scuffles between anti-racism and anti-immigration groups holding counter rallies in Melbourne's north.\n\n[Key points]\n\nHundreds of police officers had to form a line between the two groups, while mounted police also patrolled the crowd in the multicultural suburb of Coburg.\n\nBut they failed to keep some protesters apart, and officers used capsicum foam as rolling scuffles broke out between the rival groups as they made their way down the street.\n\nA group of officers in riot gear pounced on two protesters, pinning them to the ground and tying their hands with zip ties before leading them away.\n\n[Photo: Police use capsicum foam]\n\nOne of them yelled \"What am I under arrest for?\" as the incident unfolded.\n\nPolice said two people were arrested for riotous behaviour, one for assaulting police and one for hindering police. Another was arrested for robbery.\n\nTwo people were arrested before the rally for weapons offences.\n\nThe two groups hurled abuse at each other during the marches, with anti-racism protesters chanting \"Nazi scum, off our streets\".\n\nCounter-protesters attacked a group with large flagpoles flying the Australian flag.\n\n[Photo: police separate protesters]\n\nMembers of the United Patriots Front, which held a counter-rally in response to the planned anti-racism march, held a sign that read \"No refugees. Our home, our future\".\n\nThe leader of the United Patriots Front, Blair Cottrell, said the rally was an \"initial success\" but then \"the police happened\".\n\n\"They prevented us from doing what we wanted to do, which was to move up that street to counter the opposition,\" he said.\n\nHe said he wanted to counter the opposing group \"in the same way that they do, with force and terror\".\n\nPolice label protesters 'cowards', hunt for troublemakers\n\nCommander Sharon Cowden from Victoria Police said a taskforce would be set up to identify those behind the violence at the rallies.\n\nShe said both sides were to blame and condemned those who covered their faces, calling them \"cowards\".\n\n\"I understand the need and the right to protest ... but what we can't have is this violence in our community,\" Commander Cowden said. \n\n\"We saw inappropriate and often cowardly behaviour, people wearing masks.\"\n\nCommander Cowden said there were only minor injuries and the operation had been a success.\n\nShe said Victoria Police was well-prepared for an outbreak of violence and denied they had \"failed\" by not preventing the clashes in the first place.\n\n\"Some people come along ... and they're looking for trouble.\"\n\nMulticulturalism one of our great achievements: PM\n\n[Photo: Police make and arrest]\n\nA third group of people, who appeared to be those taking part in the original rally organised by local community groups on social media, walked in unison as they chanted \"Say it loud, say it clear, Muslims always welcome here\".\n\n[Tweet from 774 ABC Melbourne]\n\nWhen asked about the rallies, Prime Minister Malcolm Turnbull said Australia's multicultural society was \"one of our great achievements\" and urged mutual respect.\n\n\"We are united, we have so much in common, and we are stronger and more prosperous as a nation because of that diversity,\" he said. \n\n\"My message today and every day, as your Prime Minister, is that mutual respect, respect for each other, giving the respect to others that we ask them and expect them to give to us, that is the key to our success.\"\n\nIn February, hundreds of police separated rival groups rallying in the central Victorian city of Bendigo demonstrating for and against the construction of a local mosque.\n\n[Photo of police line]",
+  "text" : "<p>Seven people have been arrested amid violent scuffles between anti-racism and anti-immigration groups holding counter rallies in Melbourne's north.</p><p> </p><p>Hundreds of police officers had to form a line between the two groups, while mounted police also patrolled the crowd in the multicultural suburb of Coburg.</p><p>But they failed to keep some protesters apart, and officers used capsicum foam as rolling scuffles broke out between the rival groups as they made their way down the street.</p><p>A group of officers in riot gear pounced on two protesters, pinning them to the ground and tying their hands with zip ties before leading them away.</p><p> </p><p>One of them yelled \"What am I under arrest for?\" as the incident unfolded.</p><p>Police said two people were arrested for riotous behaviour, one for assaulting police and one for hindering police. Another was arrested for robbery.</p><p>Two people were arrested before the rally for weapons offences.</p><p>The two groups hurled abuse at each other during the marches, with anti-racism protesters chanting \"Nazi scum, off our streets\".</p><p>Counter-protesters attacked a group with large flagpoles flying the Australian flag.</p><p> </p><p>Members of the United Patriots Front, which held a counter-rally in response to the planned anti-racism march, held a sign that read \"No refugees. Our home, our future\".</p><p>The leader of the United Patriots Front, Blair Cottrell, said the rally was an \"initial success\" but then \"the police happened\".</p><p>\"They prevented us from doing what we wanted to do, which was to move up that street to counter the opposition,\" he said.</p><p>He said he wanted to counter the opposing group \"in the same way that they do, with force and terror\".</p><h4>Police label protesters 'cowards', hunt for troublemakers</h4><p>Commander Sharon Cowden from Victoria Police said a taskforce would be set up to identify those behind the violence at the rallies.</p><p>She said both sides were to blame and condemned those who covered their faces, calling them \"cowards\".</p><p>\"I understand the need and the right to protest ... but what we can't have is this violence in our community,\" Commander Cowden said. </p><p>\"We saw inappropriate and often cowardly behaviour, people wearing masks.\"</p><p>Commander Cowden said there were only minor injuries and the operation had been a success.</p><p>She said Victoria Police was well-prepared for an outbreak of violence and denied they had \"failed\" by not preventing the clashes in the first place.</p><p>\"Some people come along ... and they're looking for trouble.\"</p><h4>Multiculturalism one of our great achievements: PM</h4><p> </p><p>A third group of people, who appeared to be those taking part in the original rally organised by local community groups on social media, walked in unison as they chanted \"Say it loud, say it clear, Muslims always welcome here\".</p><p> </p><p>When asked about the rallies, Prime Minister Malcolm Turnbull said Australia's multicultural society was \"one of our great achievements\" and urged mutual respect.</p><p>\"We are united, we have so much in common, and we are stronger and more prosperous as a nation because of that diversity,\" he said. </p><p>\"My message today and every day, as your Prime Minister, is that mutual respect, respect for each other, giving the respect to others that we ask them and expect them to give to us, that is the key to our success.\"</p><p>In February, <a href=\"http://www.abc.net.au/news/2016-02-27/anti-racism-group-calls-for-peaceful-protest-in-bendigo/7205178\" target=\"_self\" title=\"\">hundreds of police separated rival groups rallying in the central Victorian city of Bendigo demonstrating for and against the construction of a local mosque</a>.</p><p> </p>"
+}

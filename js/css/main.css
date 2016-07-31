@@ -65,20 +65,42 @@ body, html {
 
 #time-display {
 	position: absolute;
-	height: 48px;
-	width: 186px;
+	height: 90px;
+	width: 200px;
 	color: #fff;
-	bottom: 30px;
+	bottom: 0px;
 	left: 120px;
 	z-index: 1;
 }
 
 #time-display h2 {
-	margin: 5px 0;
+	margin: 5px 0 0 0 ;
 }
 
 #time-display #button-pause {
 	bottom: 30px;
 	left: 130px;
 	position: relative;
+}
+
+#article-panel {
+	z-index: 1;
+	right: 0;
+	top: 0;
+	width: 300px;
+	height: 80%;
+	position: absolute;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#article-panel .content {
+	color: #fff;
+	margin: 20px auto;
+	height: 100%;
+	width: 80%;
+}
+
+#article-panel .thumbnail {
+	width: 80%;
+	margin: 20px 0;
 }

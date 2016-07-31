@@ -1,5 +1,6 @@
 import moment from "moment";
 import {timeUpdated} from "./signals/time-updated.js";
+import {articleClicked} from "./signals/article-clicked.js";
 import {pauseClicked} from "./signals/pause-clicked.js";
 
 const date = moment({
@@ -16,11 +17,13 @@ export default module => {
 		graphOpen: false,
 		date: date.format(),
 		hours: 0,
-		paused: false
+		paused: false,
+		article: null
 	});
 
 	module.addSignals({
 		timeUpdated,
+		articleClicked,
 		pauseClicked
 	});
 };
