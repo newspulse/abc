@@ -1,4 +1,5 @@
 attribute vec4 worldCoord;
+attribute float size;
 
 uniform mat4 mapMatrix;
 uniform float psize;
@@ -8,5 +9,5 @@ void main() {
 	gl_Position = mapMatrix * worldCoord;
 
 	// a constant size for points, regardless of zoom level
-	gl_PointSize = psize * 0.1;
+	gl_PointSize = psize * size;
 }

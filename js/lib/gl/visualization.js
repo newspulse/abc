@@ -1,7 +1,10 @@
 import createContext from "gl-context";
+import createTex from "gl-texture2d";
 import latLongToMercator from "../math/lat-long-to-mercator";
 import createShader from "gl-shader";
 import theme from "./map-theme";
+import controller from "../../controller";
+
 
 var fs = require("fs");
 
@@ -9,6 +12,8 @@ const vertShader = fs.readFileSync("lib/gl/shaders/points.vert", "utf8");
 const fragShader = fs.readFileSync("lib/gl/shaders/points.frag", "utf8");
 
 const munged = JSON.parse(fs.readFileSync("data/munged.json", "utf8"));
+
+let shader, textures = [], glReady = false, sizes;
 
 export function initMap() {
 	const mapDiv = document.getElementById('map');
@@ -54,7 +59,8 @@ export function initMap() {
 
 	let pointProgram;
 	let pointArrayBuffer;
-	let POINT_COUNT = 0;
+	let sizeArrayBuffer;
+	let pointCount = 0;
 
 	const MIN_X = 115;
 	const MAX_X = 151;
@@ -75,7 +81,7 @@ export function initMap() {
 		const canvasLayerOptions = {
 			map: map,
 			resizeHandler: resize,
-			animate: true,
+			animate: false,
 			updateHandler: update,
 			resolutionScale: resolutionScale
 		};
@@ -84,35 +90,39 @@ export function initMap() {
 
 		// initialize WebGL
 		gl = createContext(canvasLayer.canvas, {
-			premultipliedAlpha: false
+			premultipliedAlpha: false,
+			antialiasing: true
 		}, function render() {
 			// request animation frame
 		});
 
-		createShaderProgram();
-		loadData();
+		let pulseTexture = new Image();
+		pulseTexture.onload = () => {
+			let tex = createTex(gl, pulseTexture, gl.RGBA);
+			tex.generateMipmap();
+			textures.push(tex);
+			createShaderProgram();
+			loadData();
+			setBlendModes();
+			glReady = true;
+		}
+
+		pulseTexture.src = "/img/blip-texture.png";
+
+	}
+
+
+	function setBlendModes() {
+		gl.blendEquationSeparate( gl.FUNC_ADD, gl.FUNC_ADD );
+		gl.blendFuncSeparate( gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA, gl.ONE, gl.ONE );
+
+		gl.enable(gl.BLEND);
+		gl.disable(gl.DEPTH_TEST)
+		gl.depthFunc(gl.LEQUAL);
 	}
 
 	function createShaderProgram() {
-		// create vertex shader
-		const vertexSrc = vertShader;
-		const vertexShader = gl.createShader(gl.VERTEX_SHADER);
-		gl.shaderSource(vertexShader, vertexSrc);
-		gl.compileShader(vertexShader);
-
-		// create fragment shader
-		const fragmentSrc = fragShader;
-		const fragmentShader = gl.createShader(gl.FRAGMENT_SHADER);
-		gl.shaderSource(fragmentShader, fragmentSrc);
-		gl.compileShader(fragmentShader);
-
-		// link shaders to create our program
-		pointProgram = gl.createProgram();
-		gl.attachShader(pointProgram, vertexShader);
-		gl.attachShader(pointProgram, fragmentShader);
-		gl.linkProgram(pointProgram);
-
-		gl.useProgram(pointProgram);
+		shader = createShader(gl, vertShader, fragShader);
 	}
 
 	function loadData() {
@@ -123,25 +133,34 @@ export function initMap() {
 			let mPoint = munged[p];
 			if (mPoint.lonlat[0] != null) {
 				const point = latLongToMercator(mPoint.lonlat[1], mPoint.lonlat[0]);
-				rawData.push(point[0], point[1]) ;
-				POINT_COUNT++;
+				rawData.push(point[0], point[1]);
+				pointCount++;
+				// if (POINT_COUNT === 4) console.log(mPoint);
 			}
 		}
 
-		let raw = new Float32Array(rawData);
+		sizes = new Float32Array(pointCount);
 
+		console.log(sizes);
+
+		let raw = new Float32Array(rawData);
+		shader.bind();
 		// create webgl buffer, bind it, and load rawData into it
 		pointArrayBuffer = gl.createBuffer();
 		gl.bindBuffer(gl.ARRAY_BUFFER, pointArrayBuffer);
 		gl.bufferData(gl.ARRAY_BUFFER, raw, gl.STATIC_DRAW);
 
 		// enable the 'worldCoord' attribute in the shader to receive buffer
-		const attributeLoc = gl.getAttribLocation(pointProgram, 'worldCoord');
+		const attributeLoc = shader.attributes.worldCoord.location;
 
 		gl.enableVertexAttribArray(attributeLoc);
 
 		// tell webgl how buffer is laid out (pairs of x,y coords)
 		gl.vertexAttribPointer(attributeLoc, 2, gl.FLOAT, false, 0, 0);
+
+		sizeArrayBuffer = gl.createBuffer();
+		gl.bindBuffer(gl.ARRAY_BUFFER, sizeArrayBuffer);
+		gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(sizes), gl.DYNAMIC_DRAW);
 	}
 
 	function resize() {
@@ -183,9 +202,53 @@ export function initMap() {
 		matrix[15] += matrix[3] * tx + matrix[7] * ty;
 	}
 
+	let sizeIdx = 0;
+
+	function getBaseLog(x, y) {
+		if (y>1) y += 10;
+		return Math.log(y) / Math.log(x);
+	}
+
+	function rollingAverage(current, next, samples) {
+		samples = samples || 5;
+		return ((current * (samples - 1)) + next) / samples
+	}
+
+	function updateSizes() {
+		let simulationCurrentHour = controller.get("app.hours");
+		console.log(simulationCurrentHour);
+		let ix = 0;
+		for (let p in munged) {
+			let mPoint = munged[p];
+			if (mPoint.lonlat[0] != null) {
+				let offset = simulationCurrentHour - mPoint.begin;
+				if (mPoint.begin > simulationCurrentHour) {
+					sizes[ix] = 0;
+				} else if (mPoint.hits[offset]) {
+					// add the hit count
+					let hit = mPoint.hits[offset];
+					hit += (hit > 1) ? 500 : 0;
+					hit /= 2048;
+					sizes[ix] = rollingAverage(sizes[ix], hit);
+				} else {
+					sizes[ix] = 0;
+				}
+				ix++;
+			}
+		}
+	}
+
+	controller.on('change', (changes) => {
+		updateSizes();
+		update();
+	});
+
 	function update() {
+		if (!glReady) return;
+		// get data for this frame
 		gl.clear(gl.COLOR_BUFFER_BIT);
 		const mapProjection = map.getProjection();
+
 
 		/**
 		 * We need to create a transformation that takes world coordinate
@@ -208,13 +271,29 @@ export function initMap() {
 		translateMatrix(mapMatrix, -offset.x, -offset.y);
 
 		// attach matrix value to 'mapMatrix' uniform in shader
-		const matrixLoc = gl.getUniformLocation(pointProgram, 'mapMatrix');
-		const psizeLoc = gl.getUniformLocation(pointProgram, 'psize');
-		gl.uniformMatrix4fv(matrixLoc, false, mapMatrix);
-		gl.uniform1f(psizeLoc, Math.pow(2, map.zoom));
+		shader.uniforms.mapMatrix = mapMatrix
+		shader.uniforms.psize = Math.pow(1.25, map.zoom + 10);
+
+		gl.activeTexture(gl.TEXTURE0);
+		gl.bindTexture(gl.TEXTURE_2D, textures[0].handle);
+
+		// if (this.shader.attributes.start) {
+		// 	GL.bindBuffer(GL.ARRAY_BUFFER, this.buffers.start);
+		// 	GL.vertexAttribPointer(this.shader.attributes.start.location, 1, GL.FLOAT, false, 0, 0);
+		// 	GL.enableVertexAttribArray(this.shader.attributes.start.location);
+		// }
+
+		gl.bindBuffer(gl.ARRAY_BUFFER, sizeArrayBuffer);
+		gl.bufferData(gl.ARRAY_BUFFER, sizes, gl.DYNAMIC_DRAW);
+		gl.vertexAttribPointer(shader.attributes.size.location, 1, gl.FLOAT, false, 0, 0);
+		gl.enableVertexAttribArray(shader.attributes.size.location);
+
+		gl.bindBuffer(gl.ARRAY_BUFFER, pointArrayBuffer);
+		gl.vertexAttribPointer(shader.attributes.worldCoord.location, 2, gl.FLOAT, false, 0, 0);
+		gl.enableVertexAttribArray(shader.attributes.worldCoord.location);
 
 		// draw!
-		gl.drawArrays(gl.POINTS, 0, POINT_COUNT);
+		gl.drawArrays(gl.POINTS, 0, pointCount);
 
 	}
 
