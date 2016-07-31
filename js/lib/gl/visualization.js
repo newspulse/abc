@@ -141,8 +141,6 @@ export function initMap() {
 
 		sizes = new Float32Array(pointCount);
 
-		console.log(sizes);
-
 		let raw = new Float32Array(rawData);
 		shader.bind();
 		// create webgl buffer, bind it, and load rawData into it
@@ -215,8 +213,8 @@ export function initMap() {
 	}
 
 	function updateSizes() {
+		if (!glReady) return;
 		let simulationCurrentHour = controller.get("app.hours");
-		console.log(simulationCurrentHour);
 		let ix = 0;
 		for (let p in munged) {
 			let mPoint = munged[p];
