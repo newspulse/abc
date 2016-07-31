@@ -12,6 +12,7 @@ body, html {
 	-ms-user-select: none;
 	user-select: none;
 	font-family: "ap-letter-regular", Helvetica, Arial, sans-serif;
+	overflow: hidden;
 }
 
 #ui {
