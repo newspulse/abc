@@ -2,8 +2,11 @@ import React from "react";
 import {connect as Cerebral} from "cerebral-view-react";
 import {startTimer} from "../lib/timer.js";
 
+import {displayDate} from "./computed/display-date.js";
+
 @Cerebral({
-	date: "app.date"
+	date: "app.date",
+	displayDate: displayDate()
 })
 export default class TimeDisplay extends React.Component {
 	componentDidMount() {
@@ -12,7 +15,10 @@ export default class TimeDisplay extends React.Component {
 
 	render() {
 		return (
-			<div>this.props.date</div>
+			<div id="time-display">
+				<h2>{this.props.displayDate.date}</h2>
+				<h2>{this.props.displayDate.time}</h2>
+			</div>
 		);
 	}
 }
