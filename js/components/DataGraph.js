@@ -38,7 +38,7 @@ export default class DataGraph extends React.Component {
 		const valueAxis = new AmCharts.ValueAxis();
 		valueAxis.gridAlpha = 0.07;
 		valueAxis.gridColor = "#FFFFFF";
-		valueAxis.title = "Unique visitors";
+		valueAxis.title = "Total article hits per day";
 		chart.addValueAxis(valueAxis);
 
 		// GRAPH

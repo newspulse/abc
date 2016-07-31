@@ -40,7 +40,7 @@ body, html {
 .np-graph-container {
 	position: absolute;
 	bottom: 5px;
-	left: 300px;
+	left: 40px;
 	width: 800px;
 	height: 320px;
 	z-index: 100;
@@ -60,6 +60,18 @@ body, html {
 	height: 109px;
 	background-size: 160px 109px;
 	background-image: url("../img/news-pulse-logo.png");
+	background-repeat: no-repeat;
+	z-index: 90;
+}
+
+.np-abc-logo {
+	position: absolute;
+	bottom: 135px;
+	right: 101px;
+	width: 140px;
+	height: 51px;
+	background-size: 140px 51px;
+	background-image: url("../img/abc-logo.png");
 	background-repeat: no-repeat;
 	z-index: 90;
 }

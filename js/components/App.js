@@ -11,6 +11,7 @@ export default class App extends React.Component {
 	render() {
 		return (
 			<div className="app">
+				<div className="np-abc-logo"></div>
 				<div className="np-logo"></div>
 				{this.props.graphOpen ?
 					<DataGraph /> :
