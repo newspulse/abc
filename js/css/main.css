@@ -55,7 +55,7 @@ body, html {
 .np-logo {
 	position: absolute;
 	bottom: 25px;
-	left: 0px;
+	right: 90px;
 	width: 160px;
 	height: 109px;
 	background-size: 160px 109px;
@@ -67,10 +67,10 @@ body, html {
 #time-display {
 	position: absolute;
 	height: 90px;
-	width: 200px;
+	width: 500px;
 	color: #fff;
 	bottom: 0px;
-	left: 120px;
+	right: 120px;
 	z-index: 1;
 }
 
@@ -156,6 +156,8 @@ body.news-story {
 	bottom: 0;
 	right: 0;
 	background-color: rgba(0, 0, 0, 0.87);
+
+	overflow-y: scroll;
 }
 
 #news_story .twitter-pic {
