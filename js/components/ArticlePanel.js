@@ -16,6 +16,10 @@ export default class ArticlePanel extends React.Component {
 		this.props.signals.app.articleClicked(false);
 	}
 
+	handleArticleOpen() {
+		window.location.href="/coburg";
+	}
+
 	render() {
 		const {article, showArticle} = this.props;
 
@@ -39,7 +43,7 @@ export default class ArticlePanel extends React.Component {
 		}
 
 		return (
-			<div id = "article-panel">
+			<div id="article-panel" onClick={this.handleArticleOpen}>
 				<div className="content">
 					<div className="close" onClick={this.handleClose.bind(this)}>X</div>
 					<h2 className="title">{article.title}</h2>

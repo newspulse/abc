@@ -93,6 +93,7 @@ body, html {
 	position: absolute;
 	background-color: rgba(0, 0, 0, 0.5);
 	border-radius: 8px;
+	cursor: pointer;
 }
 
 #article-panel .content {
@@ -155,9 +156,30 @@ body.news-story {
 	left: 0;
 	bottom: 0;
 	right: 0;
-	background-color: rgba(0, 0, 0, 0.87);
+	background-color: #000000;
 	overflow-y: scroll;
-	padding: 40px 40px;
+}
+
+#news_story .story-container {
+	background-color: #212121;
+	width: 1032px;
+	margin: 40px auto;
+}
+
+#news_story .header-container {
+	position: relative;
+	background-color: #373b3a;
+	padding: 30px 40px;
+}
+
+.back-link {
+	position: absolute;
+	top: 30px;
+	right: 40px;
+}
+
+#news_story .body-container {
+	padding: 30px 40px;
 }
 
 #news_story .twitter-pic {
