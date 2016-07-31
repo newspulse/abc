@@ -1,6 +1,13 @@
 import moment from "moment";
 
-export function startTimer(signal, date) {
+let tickInterval;
+
+let tick = () => {};
+
+export function startTimer(props) {
+	const {timeUpdated} = props.signals.app;
+
+	const {date} = props;
 
 	const startDate = moment(date);
 
@@ -8,10 +15,8 @@ export function startTimer(signal, date) {
 
 	timerDate.add(1, "hour");
 
-	let tickInterval;
-
-	const tick = () => {
-		signal({
+	tick = () => {
+		timeUpdated({
 			date: timerDate.format(),
 			hours: timerDate.diff(startDate, "hours")
 		});
@@ -19,11 +24,32 @@ export function startTimer(signal, date) {
 		timerDate.add(1, "hour");
 
 		if (timerDate.month() !== startDate.month()) {
-			clearInterval(tickInterval);
+			clearTick();
 		}
 	};
 
+	addTick();
+}
+
+
+function clearTick() {
+	clearInterval(tickInterval);
+	tickInterval = null;
+}
+
+function addTick() {
 	tickInterval = setInterval(() => {
 		tick();
 	}, 1000);
+}
+
+export function pauseTimer(paused) {
+	if (paused && tickInterval) {
+
+		clearTick();
+
+	} else if (!paused && !tickInterval) {
+
+		addTick();
+	}
 }

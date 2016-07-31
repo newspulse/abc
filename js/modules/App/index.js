@@ -1,5 +1,6 @@
 import moment from "moment";
 import {timeUpdated} from "./signals/time-updated.js";
+import {pauseClicked} from "./signals/pause-clicked.js";
 
 const date = moment({
 	year: 2016,
@@ -14,10 +15,12 @@ export default module => {
 		stateWorks: true,
 		graphOpen: false,
 		date: date.format(),
-		hours: 0
+		hours: 0,
+		paused: false
 	});
 
 	module.addSignals({
-		timeUpdated
+		timeUpdated,
+		pauseClicked
 	});
 };

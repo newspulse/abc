@@ -75,3 +75,9 @@ body, html {
 #time-display h2 {
 	margin: 5px 0;
 }
+
+#time-display #button-pause {
+	bottom: 30px;
+	left: 130px;
+	position: relative;
+}
