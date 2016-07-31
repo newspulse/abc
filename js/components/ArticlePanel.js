@@ -4,23 +4,22 @@ import moment from "moment";
 import _ from "lodash";
 
 @Cerebral({
-	article: "app.article"
+	article: "app.article",
+	showArticle: "app.showArticle"
 })
 export default class ArticlePanel extends React.Component {
 	componentDidMount() {
-		this.props.signals.app.articleClicked();
+		// this.props.signals.app.articleClicked();
+	}
+
+	handleClose() {
+		this.props.signals.app.articleClicked(false);
 	}
 
 	render() {
-		const {article} = this.props;
+		const {article, showArticle} = this.props;
 
-		if (!article) {
-			return (
-				<div id = "article-panel">
-
-				</div>
-			);
-		}
+		if (!showArticle) return null;
 
 		const teaser = article.teaserTextPlain ? article.teaserTextPlain :
 		article.shortTeaserTextPlain;
@@ -42,6 +41,7 @@ export default class ArticlePanel extends React.Component {
 		return (
 			<div id = "article-panel">
 				<div className="content">
+					<div className="close" onClick={this.handleClose.bind(this)}>X</div>
 					<h2 className="title">{article.title}</h2>
 					<h3>{moment(article.date).format("DD MMMM YYYY h:mm A")}</h3>
 					<p className="teaser">{teaser}</p>

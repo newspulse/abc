@@ -18,7 +18,8 @@ export default module => {
 		date: date.format(),
 		hours: 0,
 		paused: false,
-		article: null
+		article: null,
+		showArticle: false
 	});
 
 	module.addSignals({

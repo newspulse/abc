@@ -16,6 +16,7 @@ export default class DataGraph extends React.Component {
 		chart.dataProvider = mayData;
 		chart.categoryField = "Day";
 		chart.color = "#FFFFFF";
+		chart.fontFamily = "Helvetica, Arial, sans-serif";
 
 		// data updated event will be fired when chart is first displayed,
 		// also when data will be updated. We'll use it to set some
@@ -55,7 +56,6 @@ export default class DataGraph extends React.Component {
 		chartCursor.cursorPosition = "mouse";
 		chartCursor.categoryBalloonDateFormat = "JJ:NN, DD MMMM";
 		chart.addChartCursor(chartCursor);
-
 		// WRITE
 		chart.write("np_graph");
 	}
