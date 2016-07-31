@@ -56,9 +56,9 @@ body, html {
 	position: absolute;
 	bottom: 25px;
 	left: 0px;
-	width: 80px;
-	height: 55px;
-	background-size: 80px 55px;
+	width: 160px;
+	height: 109px;
+	background-size: 160px 109px;
 	background-image: url("../img/news-pulse-logo.png");
 	background-repeat: no-repeat;
 	z-index: 90;
@@ -142,4 +142,36 @@ body, html {
 	background-color: white;
 	top: -25px;
 	left: 75px;
+}
+
+body.news-story {
+	background-color: #ffffff;
+	overflow-y: scroll;
+}
+
+#news_story {
+	position: absolute;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.87);
+}
+
+#news_story .twitter-pic {
+	width: 442px;
+	height: 293px;
+	background-size: 442px 293px;
+	background-repeat: no-repeat;
+	background-image: url("../img/twitter-pic.png");
+	background-position: center center;
+}
+
+#news_story .graph-thing {
+	width: 781px;
+	height: 329px;
+	background-size: 781px 329px;
+	background-repeat: no-repeat;
+	background-image: url("../img/graph-thing.png");
+	background-position: center center;
 }
