@@ -156,8 +156,8 @@ body.news-story {
 	bottom: 0;
 	right: 0;
 	background-color: rgba(0, 0, 0, 0.87);
-
 	overflow-y: scroll;
+	padding: 40px 40px;
 }
 
 #news_story .twitter-pic {
@@ -176,4 +176,34 @@ body.news-story {
 	background-repeat: no-repeat;
 	background-image: url("../img/graph-thing.png");
 	background-position: center center;
+}
+
+h3, h4, h5, h6, p {
+	margin: 0;
+}
+
+h3 {
+	color: #80CBC4;
+	font-size: 30px;
+	line-height: 36px;
+	margin-bottom: 20px;
+}
+
+h4 {
+	color: #618e8a;
+	font-size: 20px;
+}
+
+h5 {
+	color: #bcbcbc;
+	margin-bottom: 20px;
+}
+
+h6 {
+	color: #80CBC4;
+	font-size: 18px;
+}
+
+p {
+	color: #ffffff;
 }
