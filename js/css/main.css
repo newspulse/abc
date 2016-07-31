@@ -87,13 +87,23 @@ body, html {
 }
 
 #time-display h2 {
-	margin: 5px 0 0 0 ;
+	margin: 5px 0 0 70px ;
 }
 
 #time-display #button-pause {
-	bottom: 30px;
-	left: 130px;
+	bottom: 53px;
+	left: 0px;
 	position: relative;
+	width: 48px;
+	height: 48px;
+	background-size: 48px 128px;
+	background-position: 0px 0px;
+	background-image: url("../img/play-pause-icon.png");
+	cursor: pointer;
+}
+
+#time-display #button-pause.np-button-play {
+	background-position: 0px -80px;
 }
 
 #article-panel {
@@ -101,7 +111,6 @@ body, html {
 	right: 20px;
 	top: 20px;
 	width: 300px;
-	height: 80%;
 	position: absolute;
 	background-color: rgba(0, 0, 0, 0.5);
 	border-radius: 8px;
@@ -110,14 +119,16 @@ body, html {
 
 #article-panel .content {
 	color: #fff;
-	margin: 20px auto;
+	margin: 30px auto;
 	height: 100%;
 	width: 80%;
 }
 
 #article-panel .thumbnail {
 	width: 100%;
-	margin: 20px 0;
+	margin: 0;
+	border-top-left-radius:; 8px;
+	border-top-right-radius: 8px;
 }
 
 #article-panel .close {
@@ -215,6 +226,13 @@ body.news-story {
 
 h3, h4, h5, h6, p {
 	margin: 0;
+}
+
+h2 {
+	color: #80CBC4;
+	font-size: 20px;
+	line-height: 24px;
+	margin-bottom: 20px;
 }
 
 h3 {

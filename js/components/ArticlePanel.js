@@ -43,16 +43,16 @@ export default class ArticlePanel extends React.Component {
 		}
 
 		return (
-			<div id="article-panel" onClick={this.handleArticleOpen}>
-				<div className="content">
-					<div className="close" onClick={this.handleClose.bind(this)}>X</div>
+			<div id="article-panel">
+				{imageURL ? (
+					<img className="thumbnail" src={imageURL} onClick={this.handleArticleOpen} />
+				) : null}
+				<div className="content" onClick={this.handleArticleOpen}>
+					<h4>{moment(article.date).format("DD MMMM YYYY h:mm A")}</h4>
 					<h2 className="title">{article.title}</h2>
-					<h3>{moment(article.date).format("DD MMMM YYYY h:mm A")}</h3>
 					<p className="teaser">{teaser}</p>
-					{imageURL ? (
-						<img className="thumbnail" src={imageURL} />
-					) : null}
 				</div>
+				<div className="close" onClick={this.handleClose.bind(this)}>X</div>
 			</div>
 		);
 	}

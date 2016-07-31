@@ -34,9 +34,8 @@ export default class TimeDisplay extends React.Component {
 			<div id="time-display">
 				<h2>{displayDate.date}</h2>
 				<h2>{displayDate.time}</h2>
-				<button id="button-pause" onClick={this.togglePause.bind(this)}>
-					{paused ? "Play" : "Pause"}
-				</button>
+				<div className={paused ? "np-button-play" : "np-button-pause"} id="button-pause" onClick={this.togglePause.bind(this)}>
+				</div>
 			</div>
 		);
 	}
