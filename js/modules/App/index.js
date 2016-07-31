@@ -14,7 +14,7 @@ export default module => {
 
 	module.addState({
 		stateWorks: true,
-		graphOpen: false,
+		graphOpen: true,
 		date: date.format(),
 		hours: 0,
 		paused: false,

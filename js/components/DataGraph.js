@@ -1,32 +1,20 @@
 import React from "react";
 import Moment from "moment";
 import AmCharts from "../lib/amcharts/index";
+import DayMarker from "./DayMarker";
+import CoburgRallyMarker from "./CoburgRallyMarker";
+
+var fs = require("fs");
+const mayData = JSON.parse(fs.readFileSync("data/ABCTrafficPerDay.json", "utf8"));
 
 export default class DataGraph extends React.Component {
 	componentDidMount() {
 
-		const chartData = this.generateChartData();
-		// if (this.state.postOffice &&
-		// 	this.state.postOffice.id &&
-		// 	this.state.serviceVolumes &&
-		// 	this.state.serviceVolumes[this.state.postOffice.id] &&
-		// 	this.state.serviceVolumes[this.state.postOffice.id][this.props.title]) {
-		// 	const volumes = this.state.serviceVolumes[this.state.postOffice.id][this.props.title];
-		// 	const volumes_date = this.state.volumes_date;
-		// 	console.log(Moment);
-		// 	chartData = volumes.map((volume, index) => {
-		// 		let point = {};
-		// 		point.date = Moment(volumes_date, "MM-YYYY").add(index, "months").format("MMM YYYY");
-		// 		point.value = volume;
-		// 		return point;
-		// 	});
-		// }
-
 		// SERIAL CHART
 		const chart = new AmCharts.AmSerialChart();
 
-		chart.dataProvider = chartData;
-		chart.categoryField = "date";
+		chart.dataProvider = mayData;
+		chart.categoryField = "Day";
 		chart.color = "#FFFFFF";
 
 		// data updated event will be fired when chart is first displayed,
@@ -38,11 +26,12 @@ export default class DataGraph extends React.Component {
 		// AXES
 		// Category
 		const categoryAxis = chart.categoryAxis;
-		categoryAxis.parseDates = true; // in order char to understand dates, we should set parseDates to true
-		categoryAxis.minPeriod = "mm"; // as we have data with minute interval, we have to set "mm" here.
+		// categoryAxis.parseDates = true; // in order char to understand dates, we should set parseDates to true
+		//categoryAxis.minPeriod = "mm"; // as we have data with minute interval, we have to set "mm" here.
 		categoryAxis.gridAlpha = 0.07;
 		categoryAxis.gridColor = "#FFFFFF";
 		categoryAxis.axisColor = "#555555";
+		categoryAxis.title = "May 2016";
 
 		// Value
 		const valueAxis = new AmCharts.ValueAxis();
@@ -55,9 +44,7 @@ export default class DataGraph extends React.Component {
 		const graph = new AmCharts.AmGraph();
 		graph.type = "line"; // try to change it to "column"
 		graph.title = "red line";
-		graph.bullet = "round";
-		graph.bulletSize = 14;
-		graph.valueField = "visits";
+		graph.valueField = "Traffic Count";
 		graph.lineAlpha = 1;
 		graph.lineColor = "#80CBC4";
 		graph.fillAlphas = 0.3; // setting fillAlphas to > 0 value makes it area graph
@@ -68,11 +55,6 @@ export default class DataGraph extends React.Component {
 		chartCursor.cursorPosition = "mouse";
 		chartCursor.categoryBalloonDateFormat = "JJ:NN, DD MMMM";
 		chart.addChartCursor(chartCursor);
-
-		// SCROLLBAR
-		const chartScrollbar = new AmCharts.ChartScrollbar();
-
-		chart.addChartScrollbar(chartScrollbar);
 
 		// WRITE
 		chart.write("np_graph");
@@ -126,6 +108,8 @@ export default class DataGraph extends React.Component {
 		return (
 			<div className="np-graph-container">
 				<div id="np_graph"></div>
+				<DayMarker />
+				<CoburgRallyMarker />
 			</div>
 		);
 	}
