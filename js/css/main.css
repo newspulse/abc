@@ -167,6 +167,7 @@ body.news-story {
 	background-repeat: no-repeat;
 	background-image: url("../img/twitter-pic.png");
 	background-position: center center;
+	margin-top: 10px;
 }
 
 #news_story .graph-thing {
@@ -202,8 +203,31 @@ h5 {
 h6 {
 	color: #80CBC4;
 	font-size: 18px;
+	margin-top: 30px;
+	margin-bottom: 10px;
 }
 
 p {
 	color: #ffffff;
+	margin-bottom: 5px;
+}
+
+a {
+	color: #618e8a;
+}
+
+table th {
+	color: #618e8a;
+	text-align: left;
+}
+
+table th, table td {
+	padding: 8px 20px 7px 10px;
+	background-color: #333333;
+	max-width: 670px;
+}
+
+.no-padding {
+	padding: 0;
+	margin: 0;
 }
