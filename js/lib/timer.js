@@ -11,7 +11,7 @@ export function startTimer(props) {
 
 	const startDate = moment(date);
 
-	const timerDate = moment(date);
+	let timerDate = moment(date);
 
 	timerDate.add(1, "hour");
 
@@ -25,10 +25,13 @@ export function startTimer(props) {
 
 		if (timerDate.month() !== startDate.month()) {
 			clearTick();
+			timerDate = moment(date);
+			addTick();
 		}
 	};
-
-	addTick();
+	setTimeout(() => {
+		addTick();
+	}, 2000);
 }
 
 
@@ -40,7 +43,7 @@ function clearTick() {
 function addTick() {
 	tickInterval = setInterval(() => {
 		tick();
-	}, 1000);
+	}, 50);
 }
 
 export function pauseTimer(paused) {
