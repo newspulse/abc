@@ -2,6 +2,7 @@ import React from "react";
 import {connect as Cerebral} from "cerebral-view-react";
 import DataGraph from "./DataGraph.js";
 import ArticlePanel from "./ArticlePanel.js";
+import TimeDisplay from "./TimeDisplay.js";
 
 @Cerebral({
 	graphOpen: "app.graphOpen"
@@ -16,6 +17,7 @@ export default class App extends React.Component {
 					null
 				}
 				<ArticlePanel />
+				<TimeDisplay />
 			</div>
 		);
 	}
