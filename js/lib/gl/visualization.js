@@ -19,8 +19,8 @@ export function initMap() {
 	const mapDiv = document.getElementById('map');
 	const map = new google.maps.Map(mapDiv, {
 		center: {lat: -27.68, lng: 134.78},
-		zoom: 5,
-		minZoom: 5,
+		zoom: 3,
+		minZoom: 3,
 		mapTypeControl: false,
 		streetViewControl: false
 	});
@@ -32,18 +32,18 @@ export function initMap() {
 
 	map.fitBounds(ausBounds);
 
-	map.addListener("dragend", () => {
-		const center = map.getCenter();
+	// map.addListener("dragend", () => {
+	// 	const center = map.getCenter();
 
-		if (
-			center.lat() > ausBounds.f.f ||
-			center.lat() < ausBounds.f.b ||
-			center.lng() < ausBounds.b.b ||
-			center.lng() > ausBounds.b.f
-		) {
-			map.panToBounds(ausBounds);
-		}
-	});
+	// 	if (
+	// 		center.lat() > ausBounds.f.f ||
+	// 		center.lat() < ausBounds.f.b ||
+	// 		center.lng() < ausBounds.b.b ||
+	// 		center.lng() > ausBounds.b.f
+	// 	) {
+	// 		map.panToBounds(ausBounds);
+	// 	}
+	// });
 
 	// Create a new StyledMapType object, passing it the array of styles,
 	// as well as the name to be displayed on the map type control.
